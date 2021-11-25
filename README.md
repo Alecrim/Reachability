@@ -20,9 +20,9 @@ To remove the dependency, select the project and open *Swift Packages* (next to 
 
 ## Minimum Requirements
 
-| Reachability     | Swift     | Xcode      | Platforms                                       |
-| ---------------- | --------- | ---------- | ----------------------------------------------- |
-| Reachability 1.0 | Swift 5.5 | Xcode 13.0 | macOS 11.0 / iOS 13.0 / tvOS 13.0 / watchOS 7.0 |
+| Reachability     | Swift     | Xcode      | Platforms                                        |
+| ---------------- | --------- | ---------- | ------------------------------------------------ |
+| Reachability 1.0 | Swift 5.5 | Xcode 13.0 | macOS 10.15 / iOS 13.0 / tvOS 13.0 / watchOS 6.0 |
 
 ## License
 
