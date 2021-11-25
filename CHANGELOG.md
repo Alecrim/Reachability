@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.1.0] - 2021-11-25
+
+### Added
+
+- Support to SwiftUI making `Reachability` conform to `ObservableObject`.
+  
+### Changed
+  
+- `currentPath` is now a published property.
+
 ### Fixed
 
 - Minimum requirements documentation.
