@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- Support to SwiftUI making `Reachability` conform to `ObservableObject`.
+- Support to SwiftUI models making `Reachability` conform to `ObservableObject`.
   
 ### Changed
   
