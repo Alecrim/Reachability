@@ -10,13 +10,19 @@ final class ReachabilityTests: XCTestCase {
 extension ReachabilityTests {
     func testPublisherValue() {
         let expectation = expectation(description: "Value")
+        var isExpectationFulfilled = false
 
         Reachability.shared.publisher
             .sink { _ in
                 //
             } receiveValue: { path in
-                print(path.isReachable, path)
-                expectation.fulfill()
+                if isExpectationFulfilled {
+                    XCTFail("Expectation fulfilled more than once")
+                }
+                else {
+                    isExpectationFulfilled = true
+                    expectation.fulfill()
+                }
             }
             .store(in: &subscriptions)
 

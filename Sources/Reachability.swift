@@ -6,18 +6,19 @@
 //
 
 import Foundation
-import Network
 import Combine
+import Network
 
-public final class Reachability {
+public final class Reachability: ObservableObject {
     public static let shared = Reachability()
+
+    @Published public private(set) var currentPath: NWPath
 
     public private(set) lazy var publisher = makePublisher()
     public private(set) lazy var stream = makeStream()
-    public var currentPath: NWPath { monitor.currentPath }
 
     private let monitor: NWPathMonitor
-    private lazy var subject = CurrentValueSubject<NWPath, Never>(currentPath)
+    private lazy var subject = CurrentValueSubject<NWPath, Never>(monitor.currentPath)
     private var subscription: AnyCancellable?
 
     public init(requiredInterfaceType: NWInterface.InterfaceType? = nil, prohibitedInterfaceTypes: [NWInterface.InterfaceType]? = nil, queue: DispatchQueue = .main) {
@@ -38,7 +39,10 @@ public final class Reachability {
             monitor = NWPathMonitor()
         }
 
+        currentPath = monitor.currentPath
+
         monitor.pathUpdateHandler = { [weak self] path in
+            self?.currentPath = path
             self?.subject.send(path)
         }
 
@@ -58,7 +62,7 @@ public final class Reachability {
         return AsyncStream { continuation in
             var subscription: AnyCancellable?
 
-            subscription = publisher.sink { _ in
+            subscription = subject.sink { _ in
                 continuation.finish()
             } receiveValue: { value in
                 continuation.yield(value)
