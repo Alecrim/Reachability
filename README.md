@@ -10,6 +10,56 @@ While it is possible to create customised instances, a default `shared` instance
 
 The native `NWPathMonitor` is used under the covers to provide the library functionality.
 
+## Basic Usage
+
+### Simple
+
+```swift
+import Reachability
+
+if Reachability.shared.currentPath.isReachable {
+    print("We are online")
+} else {
+    print("No internet")
+}
+
+```
+
+
+### Using Combine
+
+```swift
+import Reachability
+
+var subscriptions = Set<AnyCancellable>()
+
+Reachability.shared.publisher
+    .sink { path in
+        if path.isReachable {
+            print("We are online")
+        } else {
+            print("No internet")
+        }
+    }
+    .store(in: &subscriptions)
+```
+
+### Using AsyncStream
+
+```swift
+import Reachability
+
+Task {
+    for await path in Reachability.shared.stream {
+        if path.isReachable {
+            print("We are online")
+        } else {
+            print("No internet")
+        }
+    }
+}
+```
+
 ## Installation
 
 **Reachability** can be installed using [Swift Package Manager](https://swift.org/package-manager/), a dependency manager built into Xcode.
