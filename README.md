@@ -22,9 +22,26 @@ if Reachability.shared.currentPath.isReachable {
 } else {
     print("No internet")
 }
-
 ```
 
+### SwiftUI
+
+```swift
+import SwiftUI
+import Reachability
+
+struct SomeView: View {
+    @ObservedObject var reachability = Reachability.shared
+
+    var body: some View {
+        if reachability.currentPath.isReachable {
+            // Show some data loaded from the internet
+        } else {
+            Text("No internet connection")
+        }
+    }
+}
+```
 
 ### Using Combine
 
